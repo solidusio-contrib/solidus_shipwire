@@ -1,6 +1,9 @@
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
 
+require 'simplecov'
+SimpleCov.start 'rails'
+
 begin
   require File.expand_path('../dummy/config/environment', __FILE__)
 rescue LoadError
@@ -10,19 +13,20 @@ end
 
 require 'rspec/rails'
 require 'ffaker'
+require 'active_model_serializers'
+
+# Requires factories defined in spree_core
+require 'spree/testing_support/factories'
+require 'solidus_shipwire/testing_support/factories'
+require 'spree/testing_support/url_helpers'
+require 'spree/testing_support/shipwire_factory'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 Dir[Rails.root.join('spec/support/shared_examples/**/*.rb')].each { |f| require f }
 
-# Requires factories defined in spree_core
-require 'spree/testing_support/factories'
-require 'spree/testing_support/url_helpers'
-
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
-
   # == URL Helpers
   #
   # Allows access to Spree's routes in specs:
@@ -30,6 +34,8 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
+
+  config.include ShipwireFactory
 
   # == Mock Framework
   #
@@ -40,12 +46,8 @@ RSpec.configure do |config|
   # config.mock_with :rr
   config.mock_with :rspec
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
 end
-
