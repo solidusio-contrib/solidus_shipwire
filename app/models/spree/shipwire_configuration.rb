@@ -1,4 +1,4 @@
-shipwire_configuration.rbmodule Spree
+module Spree
   class ShipwireConfiguration < Preferences::Configuration
     preference :username,             :string,  default: nil
     preference :password,             :string,  default: nil
