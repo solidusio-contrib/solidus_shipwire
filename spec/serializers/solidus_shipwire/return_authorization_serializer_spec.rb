@@ -10,7 +10,7 @@ describe SolidusShipwire::ReturnAuthorizationSerializer do
 
     before do
       return_authorization.inventory_units << order.inventory_units
-      shipment.update_attributes(shipwire_id: shipwire_id)
+      shipment.update(shipwire_id: shipwire_id)
     end
 
     subject { described_class.new(return_authorization).as_json(include: '**') }

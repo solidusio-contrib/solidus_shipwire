@@ -8,7 +8,7 @@ RSpec.describe Spree::Api::Shipwire::RatesController, type: :controller do
   let(:shipment)         { order.shipments.first }
 
   let(:variant) do
-    product.master.tap { |master| master.update_attributes(shipwire_id: shipwire_product['id']) }
+    product.master.tap { |master| master.update(shipwire_id: shipwire_product['id']) }
   end
 
   let(:rate_params) { { shipment_id: shipment.number, order_guest_token: order.guest_token } }

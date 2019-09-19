@@ -1,10 +1,9 @@
+require 'spree/core'
+
 module SolidusShipwire
   class Engine < Rails::Engine
-    require 'spree/core'
     isolate_namespace Spree
     engine_name 'solidus_shipwire'
-
-    config.autoload_paths += %W(#{config.root}/lib)
 
     # use rspec for tests
     config.generators do |g|

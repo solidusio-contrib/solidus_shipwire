@@ -9,7 +9,7 @@ xdescribe Spree::ReturnAuthorization, type: :model do
   let(:product)              { create(:product, sku: shipwire_product['sku']) }
 
   let(:variant) do
-    product.master.tap { |master| master.update_attributes(shipwire_id: shipwire_product['id']) }
+    product.master.tap { |master| master.update(shipwire_id: shipwire_product['id']) }
   end
 
   before do
@@ -108,7 +108,7 @@ xdescribe Spree::ReturnAuthorization, type: :model do
       let(:product2)          { create(:product, sku: shipwire_product2['sku']) }
 
       let(:variant2) do
-        product2.master.tap { |master| master.update_attributes(shipwire_id: shipwire_product2['id']) }
+        product2.master.tap { |master| master.update(shipwire_id: shipwire_product2['id']) }
       end
 
       let(:order) do

@@ -1,6 +1,6 @@
 # SolidusShipwire
 
-[![Build Status](https://travis-ci.org/solidusio-contrib/solidus_shipwire.svg)](https://travis-ci.org/solidusio-contrib/solidus_shipwire)
+[![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_shipwire.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_shipwire)
 
 solidus and shipwire connect manager.
 
