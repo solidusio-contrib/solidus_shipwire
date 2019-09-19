@@ -1,13 +1,7 @@
 Spree::Core::Engine.routes.draw do
-  # Add your extension routes here
-
-  Spree::Core::Engine.routes.draw do
-    namespace :admin do
-      resources :orders, except: [:show] do
-        member do
-          get :shipwire
-        end
-      end
+  namespace :api, defaults: { format: 'json' } do
+    resources :shipments, only: [] do
+      resources :rates, only: [:index], module: :shipwire
     end
   end
 
