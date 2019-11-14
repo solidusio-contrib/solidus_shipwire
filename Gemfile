@@ -4,28 +4,21 @@ branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
 gem 'solidus', github: 'solidusio/solidus', branch: branch
 
 group :test do
-  if branch == 'master' || branch >= 'v2.0'
-    gem 'rails-controller-testing'
-  else
-    gem 'rails_test_params_backport'
-  end
-  if branch < "v2.5"
-    gem 'factory_bot', '4.10.0'
-  else
-    gem 'factory_bot', '> 4.10.0'
-  end
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
-  gem "pry-rails"
-  gem 'i18n-tasks', '~> 0.9' if branch == 'master'
+  gem 'i18n-tasks', '~> 0.9'
 end
 
-gem 'simplecov', require: false, group: :test
-
-gem 'mysql2'
-gem 'sqlite3'
-gem 'pg'
+case ENV['DB']
+when 'mysql'
+  gem 'mysql2'
+when 'postgresql'
+  gem 'pg'
+else
+  gem 'sqlite3'
+end
 
 gem 'shipwire', github: 'nebulab/shipwire'
 

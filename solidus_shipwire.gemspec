@@ -17,19 +17,19 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
+  solidus_version = ['>= 1.0', '< 3']
   s.add_dependency 'active_model_serializers', '>= 0.10.0'
+  s.add_dependency 'activerecord', ['>= 4.0']
+  s.add_dependency 'retriable'
+  s.add_dependency 'shipwire', '~> 2.0'
+  s.add_dependency 'solidus_backend', solidus_version
+  s.add_dependency 'solidus_core', solidus_version
+  s.add_dependency 'solidus_support'
 
-  s.add_runtime_dependency 'solidus_core',    ['>= 1.0', '< 3']
-  s.add_runtime_dependency 'solidus_backend', ['>= 1.0', '< 3']
-  s.add_runtime_dependency 'shipwire', '~> 2.0'
-
-  s.add_runtime_dependency 'activerecord', ['>= 4.0']
-  s.add_runtime_dependency 'solidus_support'
-  s.add_runtime_dependency 'retriable'
-
+  s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails', '~> 3.0'
-  s.add_development_dependency 'vcr', '~> 3.0'
-  s.add_development_dependency 'webmock', '~> 2.1'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'vcr'
+  s.add_development_dependency 'webmock'
 end
