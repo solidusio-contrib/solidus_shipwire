@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   module Shipwireable
     module ShipwireApi
@@ -77,6 +79,7 @@ module SolidusShipwire
           response = self.class.find_on_shipwire(shipwire_id)
 
           raise SolidusShipwire::ResponseException.new(response), response.error_report unless response.ok?
+
           response
         end
 
@@ -90,6 +93,7 @@ module SolidusShipwire
           response = update_on_shipwire
 
           raise SolidusShipwire::ResponseException.new(response), response.error_report unless response.ok?
+
           response
         end
 
@@ -106,6 +110,7 @@ module SolidusShipwire
           response = create_on_shipwire
 
           raise SolidusShipwire::ResponseException.new(response), response.error_report unless response.ok?
+
           response
         end
 

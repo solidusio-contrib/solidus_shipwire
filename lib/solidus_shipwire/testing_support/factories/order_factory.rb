@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.modify do
   factory :completed_order_with_totals do
     trait :pending_on_shipwire do

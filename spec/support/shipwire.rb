@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 solidus_shipwire_config = Spree::ShipwireConfiguration.new
 solidus_shipwire_config.username = 'email@email.com'
 solidus_shipwire_config.password = 'password'

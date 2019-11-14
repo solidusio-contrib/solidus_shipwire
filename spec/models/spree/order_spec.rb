@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 describe Spree::Order do
   describe "#update_shipments_on_shipwire" do
+    subject { shipment.order.update_shipments_on_shipwire }
+
     let(:shipment) { create(:shipment, shipwire_id: 123_456) }
     let(:order)    { shipment.order }
 
     before do
-      allow(order).to receive(:complete?) { true }
+      allow(order).to receive(:complete?).and_return(true)
     end
-
-    subject { shipment.order.update_shipments_on_shipwire }
 
     it "is called after save" do
       expect(order).to receive(:update_shipments_on_shipwire)

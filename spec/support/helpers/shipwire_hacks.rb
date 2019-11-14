@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShipwireHacks
   module StubbingHelpers
     def stub_signature!
@@ -25,6 +27,6 @@ module ShipwireHacks
 end
 
 RSpec.configure do |config|
-  config.extend  ShipwireHacks::StubbingHelpers,  type: :controller
+  config.extend  ShipwireHacks::StubbingHelpers, type: :controller
   config.include ShipwireHacks::SignatureHelpers, type: :controller
 end

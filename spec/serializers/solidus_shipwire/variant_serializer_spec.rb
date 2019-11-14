@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe SolidusShipwire::VariantSerializer do
-  context "#as_json" do
+  describe "#as_json" do
+    subject { described_class.new(variant).as_json(include: '**') }
+
     let!(:variant) { create(:variant) }
 
-    subject { SolidusShipwire::VariantSerializer.new(variant).as_json(include: '**') }
-
     it "is formatted as shipwire json" do
-      is_expected.to include(
+      expect(subject).to include(
         sku: variant.sku,
         classification: "baseProduct",
         description: variant.name,

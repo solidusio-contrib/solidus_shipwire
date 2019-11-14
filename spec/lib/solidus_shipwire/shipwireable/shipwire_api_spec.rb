@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FakeShipwireApi < Shipwire::Api
   def find; end
 
@@ -31,11 +33,11 @@ describe SolidusShipwire::Shipwireable::ShipwireApi do
             .and_return(true)
         end
 
+        let(:shipwire_id) { '1234567' }
+
         it "is defined" do
           expect(DummyClass).to respond_to(:cancel_from_shipwire)
         end
-
-        let(:shipwire_id) { '1234567' }
 
         it "calls the cancel action from shipwire api class" do
           expect_any_instance_of(FakeShipwireApi)
@@ -87,6 +89,7 @@ describe SolidusShipwire::Shipwireable::ShipwireApi do
 
         context "and the shipwire id is nil" do
           let(:shipwire_id) { nil }
+
           it "returns false" do
             expect(DummyClass).not_to receive(:cancel_from_shipwire)
 

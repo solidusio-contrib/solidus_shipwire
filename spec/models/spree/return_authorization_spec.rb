@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Due to the future refactoring of returns these specs are pending until
 # returns logic is complete.
 xdescribe Spree::ReturnAuthorization, type: :model do
@@ -17,12 +19,11 @@ xdescribe Spree::ReturnAuthorization, type: :model do
   end
 
   describe "order in pending state",
-           vcr: { cassette_name: 'spree/return_authorization_not_returnable' } do
-
+    vcr: { cassette_name: 'spree/return_authorization_not_returnable' } do
     let(:order) do
       create(:shipped_order,
-             :pending_on_shipwire,
-             line_items_attributes: [product: variant.product])
+        :pending_on_shipwire,
+        line_items_attributes: [product: variant.product])
     end
 
     # Only orders that are processed and not cancelled can be returned
@@ -38,11 +39,11 @@ xdescribe Spree::ReturnAuthorization, type: :model do
   end
 
   context "order marked as shipped on shipwire",
-          vcr: { cassette_name: 'spree/return_authorization_create_entity_single_return_item' } do
+    vcr: { cassette_name: 'spree/return_authorization_create_entity_single_return_item' } do
     let(:order) do
       create(:shipped_order,
-             :shipped_on_shipwire,
-             line_items_attributes: [product: variant.product])
+        :shipped_on_shipwire,
+        line_items_attributes: [product: variant.product])
     end
 
     it 'post to shipwire' do
@@ -55,7 +56,7 @@ xdescribe Spree::ReturnAuthorization, type: :model do
     end
 
     context 'and a return was already reported',
-            vcr: { cassette_name: 'spree/return_authorization_entity_exists' } do
+      vcr: { cassette_name: 'spree/return_authorization_entity_exists' } do
       before do
         Shipwire::Returns.new.create(return_authorization.to_shipwire)
       end
@@ -70,7 +71,7 @@ xdescribe Spree::ReturnAuthorization, type: :model do
 
     context 'when generic errors occurs' do
       context 'when timeout occurs',
-              vcr: { cassette_name: 'spree/return_authorization_generic_error' } do
+        vcr: { cassette_name: 'spree/return_authorization_generic_error' } do
         let(:request) { Shipwire::Request.new }
 
         before do
@@ -101,7 +102,7 @@ xdescribe Spree::ReturnAuthorization, type: :model do
     end
 
     context "with multiple return items",
-            vcr: { cassette_name: 'spree/return_authorization_create_entity_multiple_return_item' } do
+      vcr: { cassette_name: 'spree/return_authorization_create_entity_multiple_return_item' } do
       let(:shipwire_product2) { sw_product_factory.in_stock(sku: 'product2-in') }
       let(:return_item2)      { build(:return_item, inventory_unit: order.inventory_units.second) }
       let(:return_items)      { [return_item, return_item2] }
@@ -113,9 +114,9 @@ xdescribe Spree::ReturnAuthorization, type: :model do
 
       let(:order) do
         create(:shipped_order,
-               :shipped_on_shipwire,
-               line_items_count: 2,
-               line_items_attributes: [{ product: variant.product }, { product: variant2.product }])
+          :shipped_on_shipwire,
+          line_items_count: 2,
+          line_items_attributes: [{ product: variant.product }, { product: variant2.product }])
       end
 
       it 'post to shipwire' do

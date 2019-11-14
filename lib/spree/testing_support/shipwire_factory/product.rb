@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShipwireFactory
   class Product
     def create_product_in_stock(params)
@@ -15,7 +17,6 @@ module ShipwireFactory
 
       Retriable.retriable on: { MissingOnShipwire => nil },
                           on_retry: proc{ create_product_in_stock(search_params) } do
-
         shipwire_response = Shipwire::Products.new.list(search_params)
 
         products = shipwire_response.body['resource']['items']

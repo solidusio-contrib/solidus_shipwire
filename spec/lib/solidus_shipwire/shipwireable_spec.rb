@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 describe SolidusShipwire::Shipwireable do
   context "when Shipwireable extends a class" do
+    subject { dummy_class }
+
     let(:dummy_class) do
       Class.new do
         extend SolidusShipwire::Shipwireable
@@ -8,13 +12,12 @@ describe SolidusShipwire::Shipwireable do
 
     let(:dummy_instance) { dummy_class.new }
 
-    subject { dummy_class }
-
     it { is_expected.to respond_to :acts_as_shipwireable }
 
-    context ".acts_as_shipwireable" do
-      let(:shipwireable_config) { { config: :value } }
+    describe ".acts_as_shipwireable" do
       subject { dummy_class.acts_as_shipwireable(shipwireable_config) }
+
+      let(:shipwireable_config) { { config: :value } }
 
       let(:dummy_class) do
         Class.new do

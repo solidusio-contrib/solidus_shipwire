@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Inherited Controller subscribe to shipwire', type: :request do
   context 'head requests' do
     it 'return head :ok if path exists' do

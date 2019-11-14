@@ -1,10 +1,11 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_shipwire'
   s.version     = '1.0.0'
   s.summary     = 'Solidus shipwire integration'
-  s.description = 'This extension provide the ability to connect in a easy '+
+  s.description = 'This extension provide the ability to connect in a easy ' \
                   'way your store and shipwire through API and Webhooks'
   s.required_ruby_version = '>= 1.8.7'
 
@@ -17,19 +18,16 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
+  solidus_version = ['>= 1.0', '< 3']
   s.add_dependency 'active_model_serializers', '>= 0.10.0'
+  s.add_dependency 'activerecord', ['>= 4.0']
+  s.add_dependency 'retriable'
+  s.add_dependency 'shipwire', '~> 2.0'
+  s.add_dependency 'solidus_backend', solidus_version
+  s.add_dependency 'solidus_core', solidus_version
+  s.add_dependency 'solidus_support'
 
-  s.add_runtime_dependency 'solidus_core',    ['>= 1.0', '< 3']
-  s.add_runtime_dependency 'solidus_backend', ['>= 1.0', '< 3']
-  s.add_runtime_dependency 'shipwire', '~> 2.0'
-
-  s.add_runtime_dependency 'activerecord', ['>= 4.0']
-  s.add_runtime_dependency 'solidus_support'
-  s.add_runtime_dependency 'retriable'
-
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails', '~> 3.0'
-  s.add_development_dependency 'vcr', '~> 3.0'
-  s.add_development_dependency 'webmock', '~> 2.1'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'solidus_extension_dev_tools'
+  s.add_development_dependency 'vcr'
+  s.add_development_dependency 'webmock'
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Spree::Core::Engine.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     resources :shipments, only: [] do

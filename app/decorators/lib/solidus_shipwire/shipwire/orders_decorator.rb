@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Fix for retrieve order from Shipwire gem
 module SolidusShipwire
   module OrdersDecorator

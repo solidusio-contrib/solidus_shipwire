@@ -1,7 +1,15 @@
+# frozen_string_literal: true
+
 RSpec.describe Spree::ShipwireWebhooks::StockController, type: :controller do
   stub_signature!
 
-  controller Spree::ShipwireWebhooks::StockController do
+  controller described_class do
+  end
+
+  subject do
+    @request.headers['RAW_POST_DATA'] = stock_params.to_json
+    @request.headers['Content-Type'] = 'application/json'
+    post :create, params: stock_params
   end
 
   let(:stock_item) { create(:stock_item, variant: variant, stock_location: stock_location) }
@@ -12,13 +20,13 @@ RSpec.describe Spree::ShipwireWebhooks::StockController, type: :controller do
   let(:stock_params) do
     {
       'body' => {
-        'orderId'                       => '1111',
-        'productId'                     => variant.shipwire_id,
-        'warehouseId'                   => stock_location.shipwire_id,
-        'fromState'                     => 'pending',
-        'toState'                       => 'good',
-        'delta'                         => delta,
-        'toStateStockAfterTransition'   => 23,
+        'orderId' => '1111',
+        'productId' => variant.shipwire_id,
+        'warehouseId' => stock_location.shipwire_id,
+        'fromState' => 'pending',
+        'toState' => 'good',
+        'delta' => delta,
+        'toStateStockAfterTransition' => 23,
         'fromStateStockAfterTransition' => 10
       }
     }
@@ -27,12 +35,6 @@ RSpec.describe Spree::ShipwireWebhooks::StockController, type: :controller do
   before do
     variant.update_attribute(:shipwire_id, '1234')
     stock_location.update_attribute(:shipwire_id, '5678')
-  end
-
-  subject do
-    @request.headers['RAW_POST_DATA'] = stock_params.to_json
-    @request.headers['Content-Type'] = 'application/json'
-    post :create, params: stock_params
   end
 
   context 'when receive stock webhook' do

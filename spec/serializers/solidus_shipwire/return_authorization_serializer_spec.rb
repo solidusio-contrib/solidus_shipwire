@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe SolidusShipwire::ReturnAuthorizationSerializer do
-  context "#as_json" do
+  describe "#as_json" do
+    subject { described_class.new(return_authorization).as_json(include: '**') }
+
     let(:variant)              { create(:variant, shipwire_id: 7_654_321) }
     let(:order)                { create(:shipped_order, line_items_attributes: [variant: variant, quantity: 1]) }
     let(:return_authorization) { create(:return_authorization, order: order) }
@@ -13,10 +17,8 @@ describe SolidusShipwire::ReturnAuthorizationSerializer do
       shipment.update(shipwire_id: shipwire_id)
     end
 
-    subject { described_class.new(return_authorization).as_json(include: '**') }
-
     it "is formatted as shipwire json" do
-      is_expected.to include(
+      expect(subject).to include(
         originalOrder: {
           id: shipwire_id
         },

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   module VariantDecorator
     def self.prepended(base)

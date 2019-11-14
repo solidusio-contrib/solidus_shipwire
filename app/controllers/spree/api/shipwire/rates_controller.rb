@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Api
     module Shipwire
@@ -23,6 +25,7 @@ module Spree
         def shipwire_rates(shipment_params)
           rates = ::Shipwire::Rate.new.find(shipment_params)
           raise rates.error_report unless rates.ok?
+
           rates.body['resource']['rates']
         end
 

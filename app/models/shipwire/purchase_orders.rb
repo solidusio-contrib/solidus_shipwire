@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Shipwire
   class PurchaseOrders < Api
     def list(params = {})

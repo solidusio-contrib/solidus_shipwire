@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   class ResponseException < RuntimeError
     attr_reader :response

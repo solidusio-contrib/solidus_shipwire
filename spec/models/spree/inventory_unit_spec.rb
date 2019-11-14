@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 describe Spree::InventoryUnit, type: :model do
   describe "#eligible_for_shipwire" do
+    subject { described_class.eligible_for_shipwire }
+
     before do
       create(:inventory_unit)
       create(:inventory_unit, variant: create(:variant, shipwire_id: 123_456))
     end
-
-    subject { described_class.eligible_for_shipwire }
 
     it "returns only inventory_units with shipwire_id set" do
       expect(described_class.all.count).to eq 2

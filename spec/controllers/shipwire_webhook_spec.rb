@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 RSpec.describe Spree::ShipwireWebhookController, type: :controller do
-  controller Spree::ShipwireWebhookController do
+  controller described_class do
     def create
       render json: {}, status: :no_content
     end

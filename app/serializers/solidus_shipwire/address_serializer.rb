@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   class AddressSerializer < ActiveModel::Serializer
     attributes :company, :address1, :address2, :city, :phone

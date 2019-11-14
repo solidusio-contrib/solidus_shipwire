@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'retriable'
 
 require_relative 'shipwire_factory/product'
