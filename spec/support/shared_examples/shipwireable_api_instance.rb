@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples "shipwireable api instance" do
   let(:shipwire_id)        { '1234567' }
   let(:shipwire_json)      { {} }
@@ -7,10 +9,8 @@ shared_examples "shipwireable api instance" do
 
   let(:underlying_response) do
     double("response", body:
-      { resource: { items: [{ resource: { id: 123_456 } }] } }.to_json
-    )
+      { resource: { items: [{ resource: { id: 123_456 } }] } }.to_json)
   end
-
 
   before do
     allow(described_class).to receive(:shipwire_api) { api_class }
@@ -25,7 +25,7 @@ shared_examples "shipwireable api instance" do
       expect(described_class).to receive(:find_on_shipwire)
         .with(shipwire_id).and_return(shipwire_response)
 
-      is_expected.to be_a Shipwire::Response
+      expect(subject).to be_a Shipwire::Response
     end
 
     context "when it fails" do
@@ -51,11 +51,12 @@ shared_examples "shipwireable api instance" do
       expect(described_class).to receive(:update_on_shipwire)
         .with(shipwire_id, shipwire_json).and_return(shipwire_response)
 
-      is_expected.to be_a Shipwire::Response
+      expect(subject).to be_a Shipwire::Response
     end
 
     context "when shipwire_id is nil" do
       let(:shipwire_id) { nil }
+
       it { expect{ subject }.to raise_error(RuntimeError) }
     end
   end
@@ -71,7 +72,7 @@ shared_examples "shipwireable api instance" do
       let(:response) { OpenStruct.new(ok?: true) }
 
       it "returns the shipwire object" do
-        is_expected.to eq(response)
+        expect(subject).to eq(response)
       end
     end
 
@@ -79,7 +80,7 @@ shared_examples "shipwireable api instance" do
       let(:response) { OpenStruct.new(ok?: false, error_report: "report") }
 
       it "raises an error" do
-        expect{subject}.to raise_error(
+        expect{ subject }.to raise_error(
           SolidusShipwire::ResponseException, "report"
         )
       end
@@ -91,7 +92,7 @@ shared_examples "shipwireable api instance" do
 
     context "when is persisted" do
       it "update_column on database" do
-        expect(described_instance).to receive(:persisted?) { true }
+        expect(described_instance).to receive(:persisted?).and_return(true)
         expect(described_instance).to receive(:update_column)
           .with(:shipwire_id, shipwire_id)
 
@@ -101,7 +102,7 @@ shared_examples "shipwireable api instance" do
 
     context "when is not persisted" do
       it "update shipwire id attribute" do
-        expect(described_instance).to receive(:persisted?) { false }
+        expect(described_instance).to receive(:persisted?).and_return(false)
         expect(described_instance).not_to receive(:update_column)
         expect(described_instance).to receive(:shipwire_id=).with(shipwire_id)
 
@@ -121,7 +122,7 @@ shared_examples "shipwireable api instance" do
       expect(described_class).to receive(:create_on_shipwire)
         .with(shipwire_json).and_return(shipwire_response)
 
-      is_expected.to be_a Shipwire::Response
+      expect(subject).to be_a Shipwire::Response
     end
   end
 
@@ -136,7 +137,7 @@ shared_examples "shipwireable api instance" do
       let(:response) { OpenStruct.new(ok?: true) }
 
       it "returns the shipwire object" do
-        is_expected.to eq(response)
+        expect(subject).to eq(response)
       end
     end
 
@@ -144,7 +145,7 @@ shared_examples "shipwireable api instance" do
       let(:response) { OpenStruct.new(ok?: false, error_report: "report") }
 
       it "raises an error" do
-        expect{subject}.to raise_error(
+        expect{ subject }.to raise_error(
           SolidusShipwire::ResponseException, "report"
         )
       end
@@ -156,7 +157,7 @@ shared_examples "shipwireable api instance" do
 
     context "when shipwire id is present" do
       before do
-        expect(described_instance).to receive(:shipwire_id) { 123_456 }
+        expect(described_instance).to receive(:shipwire_id).and_return(123_456)
         expect(described_instance).to receive(:find_on_shipwire)
           .and_return(shipwire_response)
       end
@@ -166,7 +167,7 @@ shared_examples "shipwireable api instance" do
 
     context "when shipwire id is not present" do
       before do
-        expect(described_instance).to receive(:shipwire_id) { nil }
+        expect(described_instance).to receive(:shipwire_id).and_return(nil)
         expect(described_instance).to receive(:create_on_shipwire)
           .and_return(shipwire_response)
       end
@@ -179,7 +180,7 @@ shared_examples "shipwireable api instance" do
     subject { described_instance.find_or_create_on_shipwire! }
 
     context "when shipwire id is present" do
-      before { allow(described_instance).to receive(:shipwire_id) { 123_456 } }
+      before { allow(described_instance).to receive(:shipwire_id).and_return(123_456) }
 
       it "calls find_on_shipwire!" do
         expect(described_instance).to receive(:find_on_shipwire)
@@ -190,7 +191,7 @@ shared_examples "shipwireable api instance" do
     end
 
     context "when shipwire id is not present" do
-      before { allow(described_instance).to receive(:shipwire_id) { nil } }
+      before { allow(described_instance).to receive(:shipwire_id).and_return(nil) }
 
       it "calls create_on_shipwire!" do
         expect(described_instance).to receive(:create_on_shipwire!)

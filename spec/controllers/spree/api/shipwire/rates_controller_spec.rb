@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 RSpec.describe Spree::Api::Shipwire::RatesController, type: :controller do
-  controller Spree::Api::Shipwire::RatesController do
+  controller described_class do
   end
+
+  subject { get :index, params: rate_params }
 
   let(:shipwire_product) { sw_product_factory.in_stock }
   let(:product)          { create(:product, sku: shipwire_product['sku']) }
@@ -12,8 +16,6 @@ RSpec.describe Spree::Api::Shipwire::RatesController, type: :controller do
   end
 
   let(:rate_params) { { shipment_id: shipment.number, order_guest_token: order.guest_token } }
-
-  subject { get :index, params: rate_params }
 
   context 'when receive rate information', vcr: { cassette_name: 'shipwire/extract_rate' } do
     let(:json_response) { JSON.parse(response.body) }
@@ -30,16 +32,16 @@ RSpec.describe Spree::Api::Shipwire::RatesController, type: :controller do
 
         service_options['serviceOptions'].each do |service_option|
           expect(service_option).to include 'serviceLevelCode',
-                                            'serviceLevelName'
+            'serviceLevelName'
 
           shipment = service_option['shipments'].first
 
           expect(shipment).to include 'expectedDeliveryMaxDate',
-                                      'expectedDeliveryMinDate',
-                                      'expectedShipDate',
-                                      'warehouseName',
-                                      'carrier',
-                                      'cost'
+            'expectedDeliveryMinDate',
+            'expectedShipDate',
+            'warehouseName',
+            'carrier',
+            'cost'
         end
       end
     end

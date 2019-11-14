@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   class VariantSerializer < ActiveModel::Serializer
     attributes :sku, :values, :dimensions

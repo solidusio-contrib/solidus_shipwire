@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Shipwire
   class Warehouses < ApiV31
     def list(params = {})

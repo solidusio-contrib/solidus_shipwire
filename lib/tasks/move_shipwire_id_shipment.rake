@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'solidus_shipwire/move_shipwire_id_to_shipment'
 
 namespace :solidus_shipwire do

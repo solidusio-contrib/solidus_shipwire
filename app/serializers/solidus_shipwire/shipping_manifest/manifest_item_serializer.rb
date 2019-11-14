@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   module ShippingManifest
     class ManifestItemSerializer < ActiveModel::Serializer

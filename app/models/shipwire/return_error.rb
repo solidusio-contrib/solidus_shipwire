@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module Shipwire
   class ReturnError
     attr_reader :key, :message
 
     ERROR_MESSAGES = {
-      shipwire_unprocessed:          "Only orders that are \"processed\" and not \"cancelled\" can be returned",
-      shipwire_already_reported:     "You have already reported this issue.",
-      shipwire_connection_failed:    "Unable to connect to Shipwire",
-      shipwire_timeout:              "Shipwire connection timeout",
+      shipwire_unprocessed: "Only orders that are \"processed\" and not \"cancelled\" can be returned",
+      shipwire_already_reported: "You have already reported this issue.",
+      shipwire_connection_failed: "Unable to connect to Shipwire",
+      shipwire_timeout: "Shipwire connection timeout",
       shipwire_something_went_wrong: "Something went wrong"
     }.freeze
 

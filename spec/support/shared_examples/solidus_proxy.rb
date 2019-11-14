@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'a shipwire object' do
   let(:solidus_entity) { described_class.first }
 
@@ -5,7 +7,7 @@ shared_examples_for 'a shipwire object' do
     subject { solidus_entity.in_shipwire }
 
     context 'with an item that is not in the collection',
-            vcr: { cassette_name: "#{described_class.name.underscore}_create_entity" } do
+      vcr: { cassette_name: "#{described_class.name.underscore}_create_entity" } do
       before do
         solidus_entity.shipwire_id = nil
       end

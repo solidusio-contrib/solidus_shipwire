@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :solidus_shipwire do
   desc 'Sync solidus variants in shipwire'
   task sync_variants: :environment do
@@ -72,15 +74,15 @@ namespace :solidus_shipwire do
 
   def results
     @results ||= {
-      updated:      {},
-      skipped:      {},
+      updated: {},
+      skipped: {},
       update_stock: {},
-      not_found:    {}
+      not_found: {}
     }
   end
 
   def update_shipwire_id(sku, shipwire_id)
-    variant = Spree::Variant.find_by_sku(sku)
+    variant = Spree::Variant.find_by(sku: sku)
 
     if variant.present?
       update_shipwire_id_variant(variant, shipwire_id)

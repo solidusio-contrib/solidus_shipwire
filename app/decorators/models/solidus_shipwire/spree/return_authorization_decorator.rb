@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   module ReturnAuthorizationDecorator
     # Return authorization on shipwire should be splitted by order on shipwire

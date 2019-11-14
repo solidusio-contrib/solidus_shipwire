@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShipwireFactory
   class Warehouse
     def default

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module ShipwireWebhooks
     class StockController < Spree::ShipwireWebhookController
@@ -12,23 +14,23 @@ module Spree
 
         render json: :ok
       rescue ActiveRecord::RecordNotFound => e
-        render json: e.message, status: 404
+        render json: e.message, status: :not_found
       rescue StandardError => e
-        render json: e.message, status: 500
+        render json: e.message, status: :internal_server_error
       end
 
       private
 
       def variant
-        @variant ||= Spree::Variant.find_by_shipwire_id! body['productId']
+        @variant ||= Spree::Variant.find_by! shipwire_id: body['productId']
       end
 
       def stock_location
-        @stock_location ||= Spree::StockLocation.find_by_shipwire_id! body['warehouseId']
+        @stock_location ||= Spree::StockLocation.find_by! shipwire_id: body['warehouseId']
       end
 
       def stock_item
-        @stock_item = variant.stock_items.find_by_stock_location_id!(stock_location)
+        @stock_item = variant.stock_items.find_by!(stock_location_id: stock_location)
       end
 
       def delta

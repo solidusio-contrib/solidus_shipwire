@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShipwireHacks
   module StubbingHelpers
     def stub_signature!

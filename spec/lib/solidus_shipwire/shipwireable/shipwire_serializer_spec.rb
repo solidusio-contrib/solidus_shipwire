@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FakeShipwireSerializer < ActiveModel::Serializer; end
 
 shared_examples "shipwire serializer shipwireable" do
@@ -10,9 +12,9 @@ shared_examples "shipwire serializer shipwireable" do
   end
 
   describe "#to_shipwire_json" do
-    let(:shipwire_serializer) { double(as_json: {}) }
-
     subject { described_class.new.to_shipwire_json }
+
+    let(:shipwire_serializer) { double(as_json: {}) }
 
     it "calls as_json on serializer" do
       expect(described_class.shipwire_serializer).to receive(:new)

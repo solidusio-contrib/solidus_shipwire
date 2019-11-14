@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   class ShipmentSerializer < ActiveModel::Serializer
     attribute :id,                            key: :orderId

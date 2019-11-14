@@ -1,17 +1,21 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe SolidusShipwire::ShipmentSerializer do
-  context "#as_json" do
+  describe "#as_json" do
+    subject { described_class.new(shipment).as_json(include: '**') }
+
     let!(:shipment)    { create(:shipment, order: order) }
     let(:variant)      { create(:variant, shipwire_id: '1234567') }
     let(:ship_address) { order.ship_address }
 
     let(:order) do
       create(:completed_order_with_totals,
-             line_items_attributes: [
-               variant: variant,
-               quantity: 1
-             ])
+        line_items_attributes: [
+          variant: variant,
+          quantity: 1
+        ])
     end
 
     let(:items_json_node) do
@@ -24,20 +28,18 @@ describe SolidusShipwire::ShipmentSerializer do
       ship_address.to_shipwire_json.merge(email: order.email)
     end
 
-    subject { SolidusShipwire::ShipmentSerializer.new(shipment).as_json(include: '**') }
-
     it "is formatted as shipwire json" do
-      is_expected.to include(
+      expect(subject).to include(
         orderId: shipment.id,
         orderNo: shipment.number,
         options: {
           warehouseId: shipment.warehouse_id,
-          currency:    "USD",
-          canSplit:    shipment.shipwire_can_split?,
-          hold:        0,
-          server:      "Production"
+          currency: "USD",
+          canSplit: shipment.shipwire_can_split?,
+          hold: 0,
+          server: "Production"
         },
-        items:  items_json_node,
+        items: items_json_node,
         shipTo: ship_to_json_node
       )
     end
@@ -46,7 +48,7 @@ describe SolidusShipwire::ShipmentSerializer do
       let(:variant) { create(:variant) }
 
       it "items is empty" do
-        is_expected.to include(items: [])
+        expect(subject).to include(items: [])
       end
     end
   end

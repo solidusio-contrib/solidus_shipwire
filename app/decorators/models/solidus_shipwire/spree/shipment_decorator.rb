@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusShipwire
   module ShipmentDecorator
     def self.prepended(base)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Shipwire::Response, type: :model do
   let(:response_instance) do
     described_class.new(underlying_response: underlying_response)

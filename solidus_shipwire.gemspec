@@ -1,10 +1,11 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'solidus_shipwire'
   s.version     = '1.0.0'
   s.summary     = 'Solidus shipwire integration'
-  s.description = 'This extension provide the ability to connect in a easy '+
+  s.description = 'This extension provide the ability to connect in a easy ' \
                   'way your store and shipwire through API and Webhooks'
   s.required_ruby_version = '>= 1.8.7'
 

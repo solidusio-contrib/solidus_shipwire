@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe SolidusShipwire::AddressSerializer do
-  context "#as_json" do
+  describe "#as_json" do
+    subject { described_class.new(address).as_json(include: '**') }
+
     let!(:address) { create(:address) }
 
-    subject { SolidusShipwire::AddressSerializer.new(address).as_json(include: '**') }
-
     it "is formatted as shipwire json" do
-      is_expected.to include(
+      expect(subject).to include(
         name: "#{address.firstname} #{address.lastname}",
         company: address.company,
         address1: address.address1,
