@@ -25,6 +25,6 @@ module ShipwireHacks
 end
 
 RSpec.configure do |config|
-  config.extend  ShipwireHacks::StubbingHelpers,  type: :controller
+  config.extend  ShipwireHacks::StubbingHelpers, type: :controller
   config.include ShipwireHacks::SignatureHelpers, type: :controller
 end

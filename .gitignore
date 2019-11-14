@@ -11,3 +11,4 @@ spec/dummy
 Gemfile.lock
 coverage
 .ruby-version
+spec/examples.txt

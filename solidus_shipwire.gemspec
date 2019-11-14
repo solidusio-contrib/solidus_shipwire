@@ -26,10 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'solidus_core', solidus_version
   s.add_dependency 'solidus_support'
 
-  s.add_development_dependency 'factory_bot'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'simplecov'
+  s.add_development_dependency 'solidus_extension_dev_tools'
   s.add_development_dependency 'vcr'
   s.add_development_dependency 'webmock'
 end
