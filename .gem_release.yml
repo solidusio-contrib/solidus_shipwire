@@ -1,0 +1,5 @@
+bump:
+  recurse: false
+  file: 'lib/solidus_shipwire/version.rb'
+  message: Bump SolidusShipwire to %{version}
+  tag: true
