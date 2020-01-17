@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
 gem 'solidus', github: 'solidusio/solidus', branch: branch
+
+# Needed to help Bundler figure out how to resolve dependencies,
+# otherwise it takes forever to resolve them.
+# See https://github.com/bundler/bundler/issues/6677
+gem 'rails', '>0.a'
 
 case ENV['DB']
 when 'mysql'
@@ -14,15 +20,6 @@ else
   gem 'sqlite3'
 end
 
-gem 'shipwire', github: 'nebulab/shipwire'
-gem 'solidus_extension_dev_tools', github: 'solidusio-contrib/solidus_extension_dev_tools'
-
-group :test do
-  gem 'rails-controller-testing'
-end
-
-group :development, :test do
-  gem 'i18n-tasks', '~> 0.9'
-end
+gem 'rails-controller-testing', group: :test
 
 gemspec
