@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'activerecord', ['>= 4.0']
   s.add_dependency 'retriable'
   s.add_dependency 'shipwire', '~> 2.0'
-  s.add_dependency 'solidus_support', '~> 0.4.0'
+  s.add_dependency 'solidus_support', '>= 0.4', '< 0.6'
 
   s.add_development_dependency 'solidus_dev_support'
   s.add_development_dependency 'vcr'
