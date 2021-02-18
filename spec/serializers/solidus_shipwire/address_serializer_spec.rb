@@ -7,10 +7,13 @@ describe SolidusShipwire::AddressSerializer do
     subject { described_class.new(address).as_json(include: '**') }
 
     let!(:address) { create(:address) }
+    let(:expected_name) do
+      SolidusSupport.combined_first_and_last_name_in_address? ? address.name : address.full_name
+    end
 
     it "is formatted as shipwire json" do
       expect(subject).to include(
-        name: "#{address.firstname} #{address.lastname}",
+        name: expected_name,
         company: address.company,
         address1: address.address1,
         address2: address.address2,

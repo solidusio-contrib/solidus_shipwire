@@ -7,7 +7,7 @@ module SolidusShipwire
     attribute :state_name, key: :state
     attribute :zipcode,    key: :postalCode
 
-    attribute(:name)    { "#{object.firstname} #{object.lastname}" }
+    attribute(:name)    { SolidusSupport.combined_first_and_last_name_in_address? ? object.name : object.full_name }
     attribute(:country) { object.country.iso }
   end
 end
