@@ -23,6 +23,6 @@ module SolidusShipwire
       request(:post, "orders/#{id}/markComplete")
     end
 
-    Shipwire::Orders.prepend self
+    ::Shipwire::Orders.prepend self
   end
 end

@@ -7,7 +7,7 @@ module SolidusShipwire
     # order on shipwire, it should be splitter in more than one return
     # authorization, one for each of them.
     def self.prepended(base)
-      base.acts_as_shipwireable api_class: Shipwire::Returns,
+      base.acts_as_shipwireable api_class: ::Shipwire::Returns,
                                 serializer: SolidusShipwire::ReturnAuthorizationSerializer
 
       # At the moment the creation on shipwire has been removed, because the old
@@ -44,6 +44,6 @@ module SolidusShipwire
     #   end
     # end
 
-    Spree::ReturnAuthorization.prepend self
+    ::Spree::ReturnAuthorization.prepend self
   end
 end

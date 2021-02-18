@@ -8,6 +8,6 @@ module SolidusShipwire
       base.acts_as_shipwireable serializer: SolidusShipwire::ShippingManifest::ManifestItemSerializer
     end
 
-    Spree::ShippingManifest::ManifestItem.prepend self
+    ::Spree::ShippingManifest::ManifestItem.prepend self
   end
 end

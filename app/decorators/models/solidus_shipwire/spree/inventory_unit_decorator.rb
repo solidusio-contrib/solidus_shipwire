@@ -6,6 +6,6 @@ module SolidusShipwire
       base.scope :eligible_for_shipwire, -> { joins(:variant).where.not(spree_variants: { shipwire_id: nil }) }
     end
 
-    Spree::InventoryUnit.prepend self
+    ::Spree::InventoryUnit.prepend self
   end
 end

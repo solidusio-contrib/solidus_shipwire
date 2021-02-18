@@ -22,7 +22,7 @@ module SolidusShipwire
     end
 
     attribute(:items) do
-      Spree::ShippingManifest
+      ::Spree::ShippingManifest
         .new(inventory_units: object.inventory_units.eligible_for_shipwire)
         .items.map(&:to_shipwire_json)
     end

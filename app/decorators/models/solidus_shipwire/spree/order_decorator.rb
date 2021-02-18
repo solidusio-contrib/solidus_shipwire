@@ -14,6 +14,6 @@ module SolidusShipwire
       end
     end
 
-    Spree::Order.prepend self
+    ::Spree::Order.prepend self
   end
 end
