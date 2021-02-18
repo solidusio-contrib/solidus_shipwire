@@ -48,7 +48,7 @@ module Spree
     end
 
     def bin_secret
-      [Spree::ShipwireConfig.secret].pack('H*')
+      [::Spree::ShipwireConfig.secret].pack('H*')
     end
   end
 end

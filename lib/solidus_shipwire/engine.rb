@@ -16,11 +16,11 @@ module SolidusShipwire
     end
 
     initializer 'solidus_shipwire.environment', before: 'spree.environment' do
-      Spree::ShipwireConfig = Spree::ShipwireConfiguration.new
+      ::Spree::ShipwireConfig = ::Spree::ShipwireConfiguration.new
     end
 
     initializer 'solidus_shipwire.environment', after: 'finisher_hook' do
-      Spree::ShipwireConfig.setup_shipwire
+      ::Spree::ShipwireConfig.setup_shipwire
     end
   end
 end

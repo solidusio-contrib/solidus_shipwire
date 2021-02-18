@@ -23,7 +23,7 @@ module SolidusShipwire
         def configure_shipwire_api_class
           shipwire_api_class = shipwireable_config[:api_class]
 
-          if shipwire_api_class.nil? || !shipwire_api_class.ancestors.include?(Shipwire::Api)
+          if shipwire_api_class.nil? || !shipwire_api_class.ancestors.include?(::Shipwire::Api)
             raise ArgumentError, "shipwire_api_class is not set or doesn't inherit from Shipwire::Api"
           end
 

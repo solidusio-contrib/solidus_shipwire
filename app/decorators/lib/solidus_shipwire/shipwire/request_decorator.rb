@@ -8,6 +8,6 @@ module SolidusShipwire
       "/api/#{@path}"
     end
 
-    Shipwire::Request.prepend self
+    ::Shipwire::Request.prepend self
   end
 end

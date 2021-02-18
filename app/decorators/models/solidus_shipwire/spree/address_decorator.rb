@@ -6,6 +6,6 @@ module SolidusShipwire
       base.acts_as_shipwireable serializer: SolidusShipwire::AddressSerializer
     end
 
-    Spree::Address.prepend self
+    ::Spree::Address.prepend self
   end
 end

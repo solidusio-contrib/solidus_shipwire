@@ -20,6 +20,6 @@ module SolidusShipwire
       resource[:classification] == "virtualKit"
     end
 
-    Shipwire::Response.prepend self
+    ::Shipwire::Response.prepend self
   end
 end

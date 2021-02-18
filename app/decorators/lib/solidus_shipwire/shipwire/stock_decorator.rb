@@ -6,6 +6,6 @@ module SolidusShipwire
       request(:post, 'stock/adjust', body: body)
     end
 
-    Shipwire::Stock.prepend self
+    ::Shipwire::Stock.prepend self
   end
 end

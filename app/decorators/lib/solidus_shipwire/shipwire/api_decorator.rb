@@ -3,7 +3,7 @@
 module SolidusShipwire
   module ApiDecorator
     def request(method, path, body: {}, params: {})
-      Shipwire::Request.send(method: method, path: full_path(path), body: body, params: params)
+      ::Shipwire::Request.send(method: method, path: full_path(path), body: body, params: params)
     end
 
     private
@@ -16,6 +16,6 @@ module SolidusShipwire
       "#{api_version}/#{path}"
     end
 
-    Shipwire::Api.prepend self
+    ::Shipwire::Api.prepend self
   end
 end

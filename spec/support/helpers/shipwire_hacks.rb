@@ -19,7 +19,7 @@ module ShipwireHacks
     def signature(data)
       OpenSSL::HMAC.hexdigest(
         OpenSSL::Digest.new('sha256'),
-        [Spree::ShipwireConfig.secret].pack('H*'),
+        [::Spree::ShipwireConfig.secret].pack('H*'),
         data
       )
     end

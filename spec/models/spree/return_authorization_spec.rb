@@ -15,7 +15,7 @@ xdescribe Spree::ReturnAuthorization, type: :model do
   end
 
   before do
-    Spree::ShipwireConfig.default_warehouse_id = default_warehouse['id']
+    ::Spree::ShipwireConfig.default_warehouse_id = default_warehouse['id']
   end
 
   describe "order in pending state",
